@@ -9,19 +9,20 @@ import (
 )
 
 type Document struct {
-	Options      *Options
-	Header       *HeaderFooter
-	Footer       *HeaderFooter
-	Type         string `validate:"required",oneof=INVOICE DELIVERY_NOTE QUOTATION`
-	Ref          string `validate:"required",min=1,max=32`
-	Version      string `validate:max=32`
-	ClientRef    string `validate:max=64`
-	Description  string `validate:max=1024`
-	Notes        string
-	Company      *Contact `validate:"required"`
-	Customer     *Contact `validate:"required"`
-	Items        []*Item
-	Date         string
+	Options     *Options
+	Header      *HeaderFooter
+	Footer      *HeaderFooter
+	Type        string `validate:"required",oneof=INVOICE DELIVERY_NOTE QUOTATION`
+	Ref         string `validate:"required",min=1,max=32`
+	Version     string `validate:max=32`
+	ClientRef   string `validate:max=64`
+	Description string `validate:max=1024`
+	Notes       string
+	Company     *Contact `validate:"required"`
+	Customer    *Contact `validate:"required"`
+	Items       []*Item
+	Date        string
+
 	ValidityDate string
 	PaymentTerm  string
 }
