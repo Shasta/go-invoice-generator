@@ -12,7 +12,10 @@ type Address struct {
 // Line break are added for new lines
 func (a *Address) ToString() string {
 	var addrString string = a.Address
-
+	// if len(a.Cif) > 0 {
+	// 	addrString += "\n"
+	// 	addrString += a.Cif
+	// }
 	if len(a.Address2) > 0 {
 		addrString += "\n"
 		addrString += a.Address2

@@ -11,6 +11,8 @@ type Contact struct {
 	Name    string  `validate:"required",min=1,max=64`
 	Logo    *[]byte // Logo byte array
 	Address *Address
+	// Cif     *string `json:"cif"`
+	// Email *string `json:"email"`
 }
 
 func (c *Contact) appendContactTODoc(x float64, y float64, fill bool, logoAlign string, pdf *gofpdf.Fpdf) float64 {
@@ -33,9 +35,9 @@ func (c *Contact) appendContactTODoc(x float64, y float64, fill bool, logoAlign 
 			var imageOpt gofpdf.ImageOptions
 			imageOpt.ImageType = format
 
-			pdf.ImageOptions(fileName, pdf.GetX(), y, 0, 30, false, imageOpt, 0, "")
+			pdf.ImageOptions(fileName, pdf.GetX(), y, 0, 13, false, imageOpt, 0, "")
 
-			pdf.SetY(y + 30)
+			pdf.SetY(y + 15)
 		}
 	}
 
@@ -45,7 +47,6 @@ func (c *Contact) appendContactTODoc(x float64, y float64, fill bool, logoAlign 
 	} else {
 		pdf.SetFillColor(255, 255, 255)
 	}
-
 	// Reset x
 	pdf.SetX(x)
 
@@ -55,8 +56,8 @@ func (c *Contact) appendContactTODoc(x float64, y float64, fill bool, logoAlign 
 	// Set name
 	pdf.SetFont("Helvetica", "B", 10)
 	pdf.Cell(40, 8, c.Name)
-	pdf.SetFont("Helvetica", "", 10)
 
+	pdf.SetFont("Helvetica", "", 10)
 	if c.Address != nil {
 		// Address rect
 		var addrRectHeight float64 = 17
@@ -76,6 +77,21 @@ func (c *Contact) appendContactTODoc(x float64, y float64, fill bool, logoAlign 
 		pdf.SetXY(x, pdf.GetY()+10)
 		pdf.MultiCell(70, 5, c.Address.ToString(), "0", "L", false)
 	}
+
+	// if c.Cif != nil {
+	// 	// pdf.Rect(x, pdf.GetY()+10, 70, 8, "F")
+	// 	pdf.SetX(x)
+	// 	pdf.SetXY(x, pdf.GetY()+10)
+	// 	pdf.SetFont("Helvetica", "B", 10)
+	// 	// pdf.Rect(x, pdf.GetY()+9, 70, pdf.GetY()+9, "F")
+	// 	pdf.Cell(40, 10, "Cif: "+*c.Cif)
+	// }
+
+	// if c.Email != nil {
+	// 	pdf.SetX(x + 10)
+	// 	pdf.SetFont("Helvetica", "B", 10)
+	// 	pdf.Cell(40, 10, "Email: "+*c.Email)
+	// }
 
 	return pdf.GetY()
 }
