@@ -28,7 +28,7 @@ func GenerateInvoicePDF() error {
 	})
 
 	doc.SetFooter(&generator.HeaderFooter{
-		Text:       "<center>Some footer text</center>",
+		Text:       "<center>Invoice to: Terms & Conditions:All payments must be made in the name of: SHASTA TECHNOLOGIES SL</center>",
 		Pagination: true,
 	})
 
@@ -55,7 +55,7 @@ func GenerateInvoicePDF() error {
 
 	// doc.SetDate("07-01-2020") If not specified will be filled automaticly
 	doc.SetCustomer(&generator.Contact{
-		Name: "Test Customer",
+		Name: "Specter Labs",
 		Address: &generator.Address{
 			Address:    "89 Rue de Paris",
 			PostalCode: "29200",
